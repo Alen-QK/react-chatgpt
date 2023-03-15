@@ -6,7 +6,9 @@ import ChatRoom from "./pages/ChatRoom";
 
 function App() {
     return (
-        <div>
+        <div style={{
+            height: "100vh"
+        }}>
             <BrowserRouter>
                 <Routes>
                     <Route path={'/'} element={<LoginIdx/>}></Route>

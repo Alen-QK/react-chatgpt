@@ -6,7 +6,8 @@ import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
 import {UtB, BtU} from '../../tools/B64';
-import {LOGIN} from "../../constants/cons";
+import {LOGIN, INIT_MESSAGE} from "../../constants/cons";
+import uuid from "react-uuid";
 
 const Login = () => {
     let [l_s, setLS] = useState(true);
@@ -66,12 +67,42 @@ const Login = () => {
                             alert(response.data.data)
                         }
                         else {
-                            const action = {
-                                type: LOGIN,
-                                payload: {id: data.id, name: data.name}
-                            };
+                            let chatHistory = new Array();
+                            const getdata = {id: data.id}
 
-                            dispatch(action);
+                            // 调取数据库中已经存在的当前用户的聊天记录
+                            axios.post(`http://localhost:${PORT}/api.gethis`, getdata)
+                                .then((r) => {
+                                    if (r.status !== 200) {
+                                        console.log('Error');
+                                    } else {
+                                        if (r.data.code !== 200) {
+                                            console.log('Select Error.');
+                                        } else {
+                                            chatHistory = r.data.data.map((item) => {
+                                                return {
+                                                    ...item,
+                                                    id: uuid()
+                                                }
+                                            });
+                                            // 记录当前用户username和userid
+                                            const loginAction = {
+                                                type: LOGIN,
+                                                payload: {id: data.id, name: data.name}
+                                            };
+
+                                            dispatch(loginAction);
+                                            // 初始化已经存在的当前用户的聊天记录
+                                            const initAction = {
+                                                type: INIT_MESSAGE,
+                                                payload: chatHistory
+                                            };
+
+                                            dispatch(initAction);
+                                        }
+                                    }
+                                })
+
                             navigate('/chatroom');
                         }
                     }
