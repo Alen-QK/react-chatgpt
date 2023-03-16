@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import Mes from "./Mes";
+import ButtonAppBar from "./APPbar";
 import {useSelector} from "react-redux";
 import {Box, Grid, Paper} from "@mui/material";
 import ChatInputForm from "./ChatInputForm";
@@ -26,6 +27,7 @@ const Chat = () => {
                   width: '100%',
                   height: '100%',
               }}>
+            <ButtonAppBar></ButtonAppBar>
             <Paper elevation={10} sx={{
                 display: 'flex',
                 width: '50%',
