@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import Mes from "./Mes";
 import {useSelector} from "react-redux";
 import {Box, Grid, Paper} from "@mui/material";
@@ -6,6 +6,16 @@ import ChatInputForm from "./ChatInputForm";
 
 const Chat = () => {
     let chatHistory = useSelector(state => state.chatInfo);
+    // 如何实现自动滚动至底，注意被Ref的scroll需要放在包裹聊天记录的div里面，这里就是Paper
+    let scroll = useRef(null);
+
+    const scrollToBottom = () => {
+        scroll.current?.scrollIntoView({behavior: 'smooth'});
+    };
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [chatHistory]);
 
     return (
         <Grid container
@@ -30,6 +40,7 @@ const Chat = () => {
                         return <Mes key={item.id} role={item.role} message={item.content}/>
                     })
                 }
+                <div ref={scroll}></div>
             </Paper>
 
             <ChatInputForm/>

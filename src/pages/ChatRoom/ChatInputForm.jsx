@@ -32,7 +32,8 @@ const ChatInputForm = () => {
             type: ADD_MESSAGE,
             payload: newText
         };
-
+        // 这里不能在dispatch前就修改chatHistory，或者说Redux并不允许你在dispatch前就修改当前state内的状态，然后还希望将此时修改的状态覆盖到reducer的state中。
+        // 正确的做法只能如当前所示，即你只能把要更新的那部分dispatch给reducer，让reducer去用这部分更新state，而不能指望在这里直接更新当前对于原先state的引用然后传入reducer覆盖它
         dispatch(userAction);
 
         chatHistory.push(newText);
@@ -71,8 +72,9 @@ const ChatInputForm = () => {
                     flexDirection: 'row',
                     justifyContent: 'space-between'
                 }}>
-                    <TextField label={'Type Something...'} placeholder={'Write what you want to chat...'} required={true} fullWidth={true} onChange={handleChange} value={text}></TextField>
-                    <Button variant="contained" endIcon={<SendIcon />} sx={{marginLeft: 5}} type={'submit'}>
+                    <TextField label={'Type Something...'} placeholder={'Write what you want to chat...'}
+                               required={true} fullWidth={true} onChange={handleChange} value={text}></TextField>
+                    <Button variant="contained" endIcon={<SendIcon/>} sx={{marginLeft: 5}} type={'submit'}>
                         Send
                     </Button>
                 </FormControl>
