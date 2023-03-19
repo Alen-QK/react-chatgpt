@@ -68,7 +68,8 @@ const Login = () => {
                         }
                         else {
                             let chatHistory = new Array();
-                            const getdata = {id: data.id}
+                            const getdata = {id: data.id};
+                            const JWT = response.data.data;
 
                             // 调取数据库中已经存在的当前用户的聊天记录
                             axios.post(`http://localhost:${PORT}/api.gethis`, getdata)
@@ -89,7 +90,7 @@ const Login = () => {
                                             // 记录当前用户username和userid
                                             const loginAction = {
                                                 type: LOGIN,
-                                                payload: {id: data.id, name: data.name}
+                                                payload: {jwt: JWT}
                                             };
 
                                             dispatch(loginAction);

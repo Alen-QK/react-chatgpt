@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {LOGOUT} from "../../constants/cons";
+import {LOGOUT, REMOVE_AUTH} from "../../constants/cons";
 
 export default function ButtonAppBar() {
     let navigate = useNavigate();
@@ -13,6 +13,13 @@ export default function ButtonAppBar() {
 
     const handleLogOut = () => {
         navigate('/');
+
+        const logout_action = {
+            type: REMOVE_AUTH,
+            payload: null
+        };
+
+        dispatch(logout_action);
 
         const action = {
             type: LOGOUT,

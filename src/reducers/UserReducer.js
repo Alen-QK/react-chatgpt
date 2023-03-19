@@ -1,8 +1,7 @@
 import {LOGIN, LOGOUT} from "../constants/cons";
 
 const initState = {
-    id: '',
-    name: ''
+    jwt: ''
 }
 
 function UserReducer(state= initState, action) {
@@ -12,8 +11,7 @@ function UserReducer(state= initState, action) {
         case LOGIN: {
             return {
                 ...state,
-                id: payload.id,
-                name: payload.name
+                jwt: payload.jwt
             }
         }
 

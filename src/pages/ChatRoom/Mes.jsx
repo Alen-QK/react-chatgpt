@@ -6,14 +6,14 @@ const Mes = (props) => {
     const message = props.message;
     let MesStyle = role === 'user' ? {
         padding: '10px',
-        maxWidth: '250px',
+        maxWidth: '300px',
         borderRadius: '30px',
         backgroundColor: '#4985f5',
         color: 'white',
         alignSelf: 'flex-end'
     } : {
         padding: '10px',
-        maxWidth: '250px',
+        maxWidth: '300px',
         borderRadius: '30px',
         backgroundColor: '#d9d9d9',
         color: 'black',

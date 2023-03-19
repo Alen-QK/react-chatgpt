@@ -9,7 +9,7 @@ import {ADD_MESSAGE} from "../../constants/cons";
 const ChatInputForm = () => {
     let [text, setText] = useState('');
     let chatHistory = useSelector(state => state.chatInfo);
-    let userid = useSelector(state => state.userInfo).id;
+    let jwt = useSelector(state => state.userInfo).jwt;
     let PORT = process.env.REACT_APP_PORT;
     let dispatch = useDispatch();
 
@@ -39,11 +39,16 @@ const ChatInputForm = () => {
         chatHistory.push(newText);
 
         const postBody = {
-            id: userid,
             data: chatHistory
         };
 
-        axios.post(`http://localhost:${PORT}/api.chatgpt`, postBody)
+        const config = {
+            headers: {
+                jwt: jwt
+            }
+        };
+
+        axios.post(`http://localhost:${PORT}/api.chatgpt`, postBody, config)
             .then((response) => {
                 let newChat = response.data.data;
 

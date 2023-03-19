@@ -1,4 +1,4 @@
-import {PASS_AUTH} from "../constants/cons";
+import {PASS_AUTH, REMOVE_AUTH} from "../constants/cons";
 
 const initState = false;
 
@@ -7,7 +7,13 @@ function AuthReducer(state= initState, action) {
 
     switch (type) {
         case PASS_AUTH: {
-            state = !initState
+            state = !initState;
+
+            return state
+        }
+
+        case REMOVE_AUTH: {
+            state = initState;
 
             return state
         }
