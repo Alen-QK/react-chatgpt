@@ -125,9 +125,10 @@ const Login = () => {
                     } else {
                         if (response.data.code === 311) {
                             alert(response.data.data)
-                        } else (
+                        } else {
+                            SwitchLS()
                             alert(response.data.data)
-                        )
+                        }
                     }
                 })
         }

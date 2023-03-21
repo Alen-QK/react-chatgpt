@@ -12,5 +12,5 @@ A React single page application of OpenAI ChatGPT api.
 
 ## Guide
 1. If you don't have account, click 'Sign Up' link then enter your username and password, application will inform you success.
-2. Then click 'Login in' link to switch to login model then enter your info which you registered.
+2. Then enter youer username and password to log in chatroom.
 3. Now you can chat with ChatGPT.
