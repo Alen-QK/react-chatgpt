@@ -5,7 +5,7 @@ A React single page application of OpenAI ChatGPT api.
 ## Quick Start
 1. npm install
 
-2. Setting your custom server port and your token of OpenAI secret key in .env file. (port default running on 3001)
+2. Setting your custom server port in .env file. (port default running on 3001)
 
 3. npm run start  
 4. If you need to init mongodb database of this project, please click link bottom of the login form. (Optional. When sign up, mongoose will create database automatically.)
